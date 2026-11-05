@@ -1,0 +1,12 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Compiler output (re-create with: python scripts/compile.py)
+build/
+
+# Never commit secrets
+.env
+*.key

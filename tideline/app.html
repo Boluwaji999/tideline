@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tideline App — Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <div class="demo-banner" id="demo-banner">Test network only · no real money · waiting for live prices</div>
+
+  <header class="topbar">
+    <a href="index.html" class="logo"><span class="logo-mark"></span>Tideline</a>
+    <div class="top-actions">
+      <button class="btn btn-ghost btn-sm" id="reset-btn" hidden>Reset demo</button>
+      <button class="btn btn-primary btn-sm" id="connect-btn">Connect demo wallet</button>
+    </div>
+  </header>
+
+  <!-- Shown before a wallet is connected -->
+  <section class="gate" id="gate">
+    <h1>Every market.<br><em>One account.</em></h1>
+    <p>Connect a demo wallet to get play-money balances on four chains. Deposit them with Tide Flow, then trade with up to 5× margin.</p>
+    <div class="gate-actions">
+      <button class="btn btn-primary" id="gate-metamask">Connect MetaMask (Sepolia)</button>
+      <button class="btn btn-ghost" id="gate-connect">Use demo wallet</button>
+    </div>
+  </section>
+
+  <main class="app" id="app" hidden>
+    <!-- Account summary -->
+    <section class="panel account">
+      <div class="acct-stat"><small>Equity</small><strong id="a-equity">$0.00</strong></div>
+      <div class="acct-stat"><small>Unrealized P&amp;L</small><strong id="a-pnl">$0.00</strong></div>
+      <div class="acct-stat"><small>Margin in use</small><strong id="a-used">$0.00</strong></div>
+      <div class="acct-stat"><small>Buying power</small><strong id="a-power">$0.00</strong></div>
+      <div class="acct-health">
+        <div class="row"><small>Margin health</small><small id="a-health-label">—</small></div>
+        <div class="meter"><span id="a-health"></span></div>
+      </div>
+      <button class="btn btn-primary" id="deposit-btn">Deposit with Tide Flow</button>
+    </section>
+
+    <!-- Real test-network vault -->
+    <section class="panel vault" aria-label="TideVault on Sepolia">
+      <div class="vault-head">
+        <div>
+          <h2><i class="vault-dot"></i> TideVault on Sepolia</h2>
+          <p class="muted">Real onchain transactions with worthless test tokens. Vault funds count as trading collateral; the trades themselves stay simulated.</p>
+        </div>
+        <a class="vault-link" id="v-contract" target="_blank" rel="noopener">View contract ↗</a>
+      </div>
+      <div id="v-body"></div>
+      <p class="v-busy" id="v-busy" role="status"></p>
+      <p class="t-error" id="v-error"></p>
+      <ul class="v-txs" id="v-txs"></ul>
+    </section>
+
+    <!-- Markets -->
+    <section class="panel markets">
+      <h2>Markets</h2>
+      <ul id="market-list"></ul>
+    </section>
+
+    <!-- Chart -->
+    <section class="panel chart-panel">
+      <div class="chart-head">
+        <div>
+          <h2 id="c-name">Bitcoin</h2>
+          <div class="c-price"><strong id="c-price">$0</strong><span id="c-change"></span></div>
+        </div>
+        <div class="range" role="group" aria-label="Chart range">
+          <button data-days="1" class="active">24H</button>
+          <button data-days="7">7D</button>
+          <button data-days="30">30D</button>
+        </div>
+      </div>
+      <div class="chart-wrap">
+        <svg id="chart" preserveAspectRatio="none"></svg>
+        <div class="chart-tip" id="chart-tip" hidden></div>
+        <p class="chart-note" id="chart-note"></p>
+      </div>
+    </section>
+
+    <!-- Order ticket -->
+    <section class="panel ticket">
+      <div class="side-toggle" role="group" aria-label="Order side">
+        <button class="active long" data-side="1">Long</button>
+        <button class="short" data-side="-1">Short</button>
+      </div>
+      <label class="field">
+        <span>Margin (USDC)</span>
+        <div class="input-wrap">
+          <input type="number" id="t-margin" min="0" step="10" value="100" inputmode="decimal">
+          <button type="button" id="t-max">Max</button>
+        </div>
+      </label>
+      <label class="field">
+        <span>Leverage <b id="t-lev-label">2×</b></span>
+        <input type="range" id="t-lev" min="1" max="5" step="1" value="2">
+        <div class="ticks"><span>1×</span><span>2×</span><span>3×</span><span>4×</span><span>5×</span></div>
+      </label>
+      <dl class="summary">
+        <div><dt>Position size</dt><dd id="t-size">$0</dd></div>
+        <div><dt>Entry price</dt><dd id="t-entry">$0</dd></div>
+        <div><dt>Est. liquidation</dt><dd id="t-liq">$0</dd></div>
+        <div><dt>Fee (0.05%)</dt><dd id="t-fee">$0</dd></div>
+      </dl>
+      <button class="btn btn-primary btn-block" id="t-submit">Long BTC</button>
+      <p class="t-error" id="t-error"></p>
+    </section>
+
+    <!-- Positions / history -->
+    <section class="panel positions">
+      <div class="tabs" role="tablist">
+        <button class="active" data-tab="open" role="tab">Positions <span id="pos-count">0</span></button>
+        <button data-tab="history" role="tab">History</button>
+        <button data-tab="wallet" role="tab">Wallet</button>
+      </div>
+      <div class="tab-body" id="tab-open"></div>
+      <div class="tab-body" id="tab-history" hidden></div>
+      <div class="tab-body" id="tab-wallet" hidden></div>
+    </section>
+  </main>
+
+  <!-- Deposit modal -->
+  <dialog id="deposit-modal">
+    <form method="dialog" class="modal" id="deposit-form">
+      <div class="modal-head">
+        <h3>Deposit with <em>Tide Flow</em></h3>
+        <button value="cancel" class="x" aria-label="Close">×</button>
+      </div>
+      <div id="dep-pick">
+        <p class="muted">Choose what to deposit. It arrives as USDC collateral, with no bridging or gas needed.</p>
+        <div class="sources" id="dep-sources"></div>
+        <label class="field">
+          <span>Amount <b id="dep-avail"></b></span>
+          <div class="input-wrap">
+            <input type="number" id="dep-amount" min="0" step="any" inputmode="decimal">
+            <button type="button" id="dep-max">Max</button>
+          </div>
+        </label>
+        <p class="dep-quote">You receive ≈ <b id="dep-usd">$0.00</b> USDC</p>
+        <button type="button" class="btn btn-primary btn-block" id="dep-go">Deposit</button>
+        <p class="t-error" id="dep-error"></p>
+      </div>
+      <div id="dep-progress" hidden>
+        <ul class="dep-steps">
+          <li>Finding the best route</li>
+          <li id="dep-swap-step">Swapping to USDC</li>
+          <li>Settling on Base</li>
+          <li>Credited to your account</li>
+        </ul>
+        <button value="done" class="btn btn-primary btn-block" id="dep-done" disabled>Done</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="config.js"></script>
+  <script src="prices.js"></script>
+  <script src="onchain.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

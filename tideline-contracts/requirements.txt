@@ -1,0 +1,9 @@
+# Pinned versions that were installed and tested together (Python 3.12, Windows).
+# Note: eth-tester and py-evm are listed separately on purpose. The
+# "eth-tester[py-evm]" extra pulls in safe-pysha3, which needs a C++ compiler
+# on Windows. py-evm on its own uses pycryptodome (pure wheels) instead.
+py-solc-x==2.0.5
+web3==7.16.0
+eth-tester==0.13.0b1
+py-evm==0.12.1b1
+pytest==8.4.2

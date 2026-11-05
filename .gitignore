@@ -1,0 +1,13 @@
+# Wallet keys and secrets must never be uploaded
+*.key
+.env
+.env.*
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Local editor and tool settings
+.claude/

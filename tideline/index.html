@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tideline — Every market. One account.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Live ticker -->
+  <div class="ticker" aria-label="Live prices">
+    <div class="ticker-track" id="ticker"></div>
+  </div>
+
+  <header class="nav wrap">
+    <a href="#" class="logo"><span class="logo-mark"></span>Tideline</a>
+    <nav class="links" aria-label="Main">
+      <a href="#products">Products</a>
+      <a href="#how">How it works</a>
+      <a href="#developers">Developers</a>
+      <a href="#roadmap">Roadmap</a>
+    </nav>
+    <a href="app.html" class="btn btn-primary btn-sm">Launch app ↗</a>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <span class="eyebrow"><i class="dot"></i> Live on the Sepolia test network</span>
+        <h1>Every market.<br><em>One account.</em></h1>
+        <p class="lede">Tideline is a concept for a brokerage network for onchain finance: one account for deposits, trading and margin. Try the working vault on a test network.</p>
+        <div class="cta">
+          <a href="app.html" class="btn btn-primary">Start trading →</a>
+          <a href="#how" class="btn btn-ghost">See how it works</a>
+        </div>
+        <dl class="stats">
+          <div><dt>Network</dt><dd>Sepolia</dd></div>
+          <div><dt>Contracts live</dt><dd>2</dd></div>
+          <div><dt>Real money at risk</dt><dd>$0</dd></div>
+        </dl>
+      </div>
+
+      <!-- Network visual: chains flowing into one account -->
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 520 520" class="network">
+          <defs>
+            <radialGradient id="core" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#7cf5d0"/>
+              <stop offset="60%" stop-color="#1fb58f"/>
+              <stop offset="100%" stop-color="#0a3d33"/>
+            </radialGradient>
+          </defs>
+          <circle cx="260" cy="260" r="210" class="orbit"/>
+          <circle cx="260" cy="260" r="140" class="orbit"/>
+          <g id="spokes"></g>
+          <circle cx="260" cy="260" r="58" fill="url(#core)" class="core"/>
+          <text x="260" y="256" class="core-label">ONE</text>
+          <text x="260" y="274" class="core-label">ACCOUNT</text>
+        </svg>
+        <div class="balance-card">
+          <small>Example balance</small>
+          <strong>$128,402.17</strong>
+          <div class="bar"><span style="--w:46%;--c:#f7931a"></span><span style="--w:31%;--c:#7b8cff"></span><span style="--w:23%;--c:#2fe3b0"></span></div>
+          <ul>
+            <li><i style="--c:#f7931a"></i>BTC <b>46%</b></li>
+            <li><i style="--c:#7b8cff"></i>ETH <b>31%</b></li>
+            <li><i style="--c:#2fe3b0"></i>USDC <b>23%</b></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Real data read from the deployed vault -->
+    <section class="live wrap" aria-label="Live vault data">
+      <div class="live-volume">
+        <span class="live-pill"><i class="dot"></i> Onchain</span>
+        <strong id="vault-total">Loading…</strong>
+        <small>mUSDC in TideVault right now, read from Sepolia</small>
+      </div>
+      <div class="live-feed">
+        <small>The contracts behind this page</small>
+        <ul>
+          <li><span>TideVault</span><a href="https://sepolia.etherscan.io/address/0x8bf8D1D4e28cb28F73Cd281ECfaD660e2b2281CB" target="_blank" rel="noopener">0x8bf8…81CB ↗</a></li>
+          <li><span>MockUSDC</span><a href="https://sepolia.etherscan.io/address/0x863BE4f5B669735bA8b5663E7e81381C31F324bA" target="_blank" rel="noopener">0x863B…24bA ↗</a></li>
+        </ul>
+        <p class="live-note">These are test contracts holding worthless tokens. They have not been audited.</p>
+      </div>
+    </section>
+
+    <!-- Chains strip -->
+    <section class="chains wrap" id="network">
+      <p>Chains we plan to support</p>
+      <div class="chain-list">
+        <span>Bitcoin</span><span>Ethereum</span><span>Solana</span><span>Base</span><span>Arbitrum</span><span>Optimism</span><span>Sui</span><span>Avalanche</span>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products wrap" id="products">
+      <h2 class="section-title">Three products.<br><em>One network.</em></h2>
+      <div class="product-grid">
+        <article class="product">
+          <div class="product-head"><span class="tag">Tide Flow</span><span class="status live">● Vault on testnet</span></div>
+          <h3>Bring users and their capital into your app.</h3>
+          <p>Accept deposits from any chain in one click. Tide Flow handles bridging, swapping and settlement so funds arrive ready to use.</p>
+          <ul class="facts"><li>Multi-chain deposits planned</li><li>Users never need gas tokens</li><li>One SDK, one integration</li></ul>
+          <div class="flow-demo" aria-hidden="true">
+            <div class="chip">SOL</div><div class="pipe"><i></i></div>
+            <div class="chip">ETH</div><div class="pipe"><i></i></div>
+            <div class="chip accent">Your app</div>
+          </div>
+          <a href="app.html" class="more">Try the testnet vault →</a>
+        </article>
+        <article class="product">
+          <div class="product-head"><span class="tag">Tide Margin</span><span class="status dev">◐ Simulated demo</span></div>
+          <h3>Cross-venue, cross-asset margin.</h3>
+          <p>Post collateral once and trade spot, perps and options across venues. Positions net against each other, so your capital works harder.</p>
+          <ul class="facts"><li>Up to 5× buying power</li><li>Spot, perps and options</li><li>Real-time margin health</li></ul>
+          <div class="margin-demo" aria-hidden="true">
+            <div class="row"><span>Collateral</span><b>$50,000</b></div>
+            <div class="row"><span>Buying power</span><b class="up" id="power">$212,500</b></div>
+            <div class="meter"><span id="meter"></span></div>
+            <div class="row small"><span>Margin health</span><span id="health">Healthy · 72%</span></div>
+          </div>
+          <a href="app.html" class="more">Try the demo →</a>
+        </article>
+        <article class="product">
+          <div class="product-head"><span class="tag">Tide Equities</span><span class="status dev">◐ Concept</span></div>
+          <h3>Tokenized stocks, onchain and around the clock.</h3>
+          <p>Trade tokenized shares with stablecoin margin, or lend them out to earn yield, from the same account as your crypto.</p>
+          <ul class="facts"><li>Long and short with USDC</li><li>Lend shares, earn yield</li><li>Trades 24/7</li></ul>
+          <div class="equity-demo" aria-hidden="true">
+            <div class="row"><span>xNVDA</span><b class="up">+2.41%</b></div>
+            <div class="row"><span>xAAPL</span><b class="down">−0.37%</b></div>
+            <div class="row"><span>xTSLA</span><b class="up">+1.08%</b></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="how wrap" id="how">
+      <h2 class="section-title">How it <em>works</em></h2>
+
+      <!-- Interactive deposit journey -->
+      <div class="journey">
+        <div class="j-step">
+          <small>1 · Your assets</small>
+          <div class="j-chains" role="group" aria-label="Pick a source chain">
+            <button class="active" data-chain="Solana" data-asset="SOL">Solana</button>
+            <button data-chain="Bitcoin" data-asset="BTC">Bitcoin</button>
+            <button data-chain="Arbitrum" data-asset="ETH">Arbitrum</button>
+            <button data-chain="Base" data-asset="USDC">Base</button>
+          </div>
+          <p class="j-detail"><b id="j-amount">12.5 SOL</b> on <span id="j-chain">Solana</span></p>
+        </div>
+        <div class="j-arrow" aria-hidden="true"><i></i></div>
+        <div class="j-step core">
+          <small>2 · Tide Flow</small>
+          <ul class="j-tasks">
+            <li>Route found</li><li>Swapped to USDC</li><li>Settled on Base</li>
+          </ul>
+        </div>
+        <div class="j-arrow" aria-hidden="true"><i></i></div>
+        <div class="j-step">
+          <small>3 · Ready in the app</small>
+          <p class="j-ready"><b id="j-usd">$2,155.00</b> available to trade</p>
+        </div>
+      </div>
+      <p class="j-note">Nothing to bridge. No chain switching. No gas to top up.</p>
+
+      <ol class="steps">
+        <li><span>01</span><h4>Deposit from anywhere</h4><p>Send assets from any supported chain. They land in a single account, no bridges to manage.</p></li>
+        <li><span>02</span><h4>Trade every venue</h4><p>Orders route to the best price across connected exchanges and liquidity pools.</p></li>
+        <li><span>03</span><h4>Settle in seconds</h4><p>Everything settles onchain and stays in your custody, visible and verifiable.</p></li>
+      </ol>
+    </section>
+
+    <!-- Developers -->
+    <section class="dev wrap" id="developers">
+      <div>
+        <h2 class="section-title">Planned: onchain markets <em>in an afternoon</em></h2>
+        <p class="lede">A preview of the SDK we plan to build. Your users would deposit from wherever their money lives, and you would receive funds on the chain you choose.</p>
+      </div>
+      <pre class="code"><code><span class="c">// Accept deposits from any chain</span>
+<span class="k">import</span> { TideFlow } <span class="k">from</span> <span class="s">"@tideline/sdk"</span>;
+
+<span class="k">const</span> flow = <span class="k">new</span> TideFlow({
+  destination: <span class="s">"base"</span>,
+  asset: <span class="s">"USDC"</span>,
+});
+
+<span class="k">await</span> flow.<span class="f">open</span>({ user: wallet.address });
+<span class="c">// ✓ funds arrive settled and ready</span></code></pre>
+    </section>
+
+    <!-- Roadmap timeline -->
+    <section class="roadmap wrap" id="roadmap">
+      <h2 class="section-title">The road <em>ahead</em></h2>
+      <ol class="timeline">
+        <li class="done"><span class="year">2026</span><h4>Testnet</h4><p>TideVault goes live on Sepolia, with deposits and withdrawals working through MetaMask.</p></li>
+        <li><span class="year">Next</span><h4>Mainnet</h4><p>After a security audit, Tide Flow and Tide Margin launch with real assets.</p></li>
+        <li><span class="year">Later</span><h4>Equities</h4><p>Tide Equities brings tokenized stocks into the same account, tradable around the clock.</p></li>
+        <li><span class="year">Later</span><h4>Open network</h4><p>Any app can plug in as a venue, sharing users and liquidity across the whole network.</p></li>
+      </ol>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final wrap">
+      <h2>The markets are moving onchain.<br><em>Move with them.</em></h2>
+      <a href="app.html" class="btn btn-primary">Launch app ↗</a>
+    </section>
+  </main>
+
+  <footer class="footer wrap">
+    <a href="#" class="logo"><span class="logo-mark"></span>Tideline</a>
+    <p>© 2026 Tideline. A concept project on a test network. No real money.</p>
+    <nav><a href="app.html">App</a><a href="#roadmap">Roadmap</a></nav>
+  </footer>
+
+  <button class="to-top" id="to-top" aria-label="Back to top">↑</button>
+
+  <script src="config.js"></script>
+  <script src="prices.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

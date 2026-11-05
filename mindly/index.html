@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mindly — A clearer mind</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+  <section class="hero">
+    <!-- Nav -->
+    <header class="nav">
+      <a href="#" class="logo">Mindly<sup>°</sup></a>
+      <nav class="nav-pill" aria-label="Main">
+        <span class="nav-glow" aria-hidden="true"></span>
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#integrations">Integrations</a>
+        <a href="#pricing">Pricing</a>
+      </nav>
+      <a href="#" class="btn btn-dark btn-sm">Get the app <span class="arrow-ne">↗</span></a>
+    </header>
+
+    <!-- Headline -->
+    <section class="intro">
+      <h1 class="reveal">
+        A clearer mind<br>
+        <em>for a brighter you.</em>
+      </h1>
+      <p class="lede reveal">
+        Mindly helps you capture ideas, organize your thoughts,<br class="hide-sm">
+        and stay focused — all in one beautiful space.
+      </p>
+      <div class="cta reveal">
+        <a href="#" class="btn btn-dark">Get started free <span>→</span></a>
+        <a href="#" class="btn btn-light"><span class="play">▶</span> Watch video</a>
+      </div>
+    </section>
+
+    <!-- Rotating badge -->
+    <div class="badge" data-depth="10" aria-hidden="true">
+      <svg viewBox="0 0 120 120" class="badge-text">
+        <defs><path id="circle" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
+        <text><textPath href="#circle" textLength="284" lengthAdjust="spacing">A MORE FOCUSED YOU · EVERYDAY · </textPath></text>
+      </svg>
+      <span class="sparkle">✦</span>
+    </div>
+
+    <!-- Floating side cards -->
+    <article class="float-card left" data-depth="18">
+      <div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <h3>Turn thoughts<br>into progress.</h3>
+      <p>Capture, organise and do more.</p>
+    </article>
+
+    <article class="float-card right" data-depth="-14">
+      <div class="avatars sm">
+        <span style="--c:#c9b8a6">A</span><span style="--c:#8c8c8c">J</span><span style="--c:#d8c9b9">M</span><span class="plus">+</span>
+      </div>
+      <h3>Ideas, anytime,<br>anywhere.</h3>
+      <p>Sync across all<br>your devices.</p>
+    </article>
+
+    <!-- Center stage: orb with an orbiting ring of glass cards -->
+    <div class="stage" aria-hidden="true">
+      <div class="orb">
+        <!-- Swap the orb for a photo: drop portrait.png next to this file -->
+        <img src="portrait.png" alt="" onerror="this.remove()">
+      </div>
+      <div class="ring">
+        <div class="item glass" style="--i:0">
+          <span class="ico" style="--ic:#d4f36b">◎</span>
+          <div><b>Focus</b><small>Deep work, bigger results.</small></div>
+        </div>
+        <div class="item photo mountain" style="--i:1"></div>
+        <div class="item glass" style="--i:2">
+          <span class="ico" style="--ic:#bfaeff">⌂</span>
+          <div><b>Ideas</b><small>Capture everything.</small></div>
+        </div>
+        <div class="item photo moon" style="--i:3"></div>
+        <div class="item glass" style="--i:4">
+          <span class="ico" style="--ic:#ffb98a">▣</span>
+          <div><b>Plan</b><small>Turn ideas into action.</small></div>
+        </div>
+        <div class="item photo dunes" style="--i:5"></div>
+        <div class="item glass" style="--i:6">
+          <span class="ico" style="--ic:#9fdcff">✎</span>
+          <div><b>Journal</b><small>Reflect every day.</small></div>
+        </div>
+        <div class="item photo mist" style="--i:7"></div>
+      </div>
+    </div>
+
+    <!-- Bottom corners -->
+    <div class="trusted">
+      <span class="rule"></span>
+      <p>Trusted by 50,000+<br>creators worldwide.</p>
+      <div class="avatars">
+        <span style="--c:#bfa58f">S</span><span style="--c:#7d7d7d">L</span><span style="--c:#d9c7b3">R</span><span style="--c:#5a5a5a">K</span><span class="plus">+</span>
+      </div>
+    </div>
+
+    <div class="clarity">
+      <span class="sparkle sm">✦</span>
+      <p><span class="rule"></span>Less chaos.<br>More clarity.</p>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section" id="features">
+    <p class="kicker">Features</p>
+    <h2 class="title">Everything your mind needs,<br><em>nothing it doesn't.</em></h2>
+    <div class="bento">
+      <article class="tile tile-wide">
+        <h3>Capture in a second</h3>
+        <p>Type, speak or paste. Every thought lands in one inbox before it slips away.</p>
+        <div class="capture" aria-hidden="true">
+          <span class="capture-icon">+</span>
+          <span class="capture-text" id="capture-text"></span><span class="caret"></span>
+        </div>
+      </article>
+      <article class="tile tile-tall dark">
+        <h3>Focus mode</h3>
+        <p>One task, one timer, zero noise.</p>
+        <div class="timer" aria-hidden="true">
+          <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" class="track"/><circle cx="60" cy="60" r="52" class="progress" id="timer-ring"/></svg>
+          <span id="timer-text">25:00</span>
+        </div>
+        <button class="btn btn-light btn-sm" id="timer-btn">Start focus</button>
+      </article>
+      <article class="tile">
+        <h3>Organized for you</h3>
+        <p>Notes sort themselves into projects you can find later.</p>
+        <div class="chips" aria-hidden="true"><span>Work</span><span>Ideas</span><span>Reading</span><span>Health</span><span>Travel</span></div>
+      </article>
+      <article class="tile">
+        <h3>Daily review</h3>
+        <p>Five calm minutes each evening to close open loops.</p>
+        <div class="streak" aria-hidden="true">
+          <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i>
+        </div>
+        <small class="muted">5-day streak</small>
+      </article>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section" id="how">
+    <p class="kicker">How it works</p>
+    <h2 class="title">From scattered<br><em>to settled.</em></h2>
+    <ol class="how-steps">
+      <li><span class="num">01</span><h3>Capture</h3><p>Drop every idea, task and worry into Mindly the moment it appears, on any device.</p></li>
+      <li><span class="num">02</span><h3>Organize</h3><p>Mindly groups related thoughts and suggests what matters today, so your list stays short.</p></li>
+      <li><span class="num">03</span><h3>Focus</h3><p>Pick one thing, start a focus session, and let everything else wait quietly.</p></li>
+    </ol>
+  </section>
+
+  <!-- Integrations -->
+  <section class="section integrations" id="integrations">
+    <div>
+      <p class="kicker">Integrations</p>
+      <h2 class="title">Works with the tools<br><em>you already use.</em></h2>
+      <p class="muted lead">Bring in emails, events and tasks automatically, and send finished plans back where your team works.</p>
+    </div>
+    <div class="orbit-wrap" aria-hidden="true">
+      <div class="orbit-core"><span>Mindly<sup>°</sup></span></div>
+      <div class="orbit-ring r1"><span>Calendar</span><span>Gmail</span><span>Slack</span></div>
+      <div class="orbit-ring r2"><span>Notion</span><span>Todoist</span><span>Drive</span><span>Zapier</span></div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="section" id="pricing">
+    <p class="kicker">Pricing</p>
+    <h2 class="title">Simple plans,<br><em>clear choices.</em></h2>
+    <div class="billing" role="group" aria-label="Billing period">
+      <button class="active" data-period="monthly">Monthly</button>
+      <button data-period="yearly">Yearly <small>−20%</small></button>
+    </div>
+    <div class="plans">
+      <article class="plan">
+        <h3>Free</h3>
+        <p class="price"><b>$0</b><span>forever</span></p>
+        <ul><li>Unlimited notes</li><li>Focus timer</li><li>Sync on 2 devices</li></ul>
+        <a href="#" class="btn btn-light">Get started</a>
+      </article>
+      <article class="plan featured">
+        <span class="badge-pop">Most popular</span>
+        <h3>Pro</h3>
+        <p class="price"><b data-monthly="8" data-yearly="6.40">$8</b><span>per month</span></p>
+        <ul><li>Everything in Free</li><li>Smart organizing</li><li>Daily review &amp; insights</li><li>Unlimited devices</li></ul>
+        <a href="#" class="btn btn-dark">Start 14-day trial</a>
+      </article>
+      <article class="plan">
+        <h3>Teams</h3>
+        <p class="price"><b data-monthly="14" data-yearly="11.20">$14</b><span>per user / month</span></p>
+        <ul><li>Everything in Pro</li><li>Shared spaces</li><li>Admin controls</li></ul>
+        <a href="#" class="btn btn-light">Contact sales</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq">
+    <h2 class="title">Questions,<br><em>answered.</em></h2>
+    <div class="faq-list">
+      <details><summary>Is my data private?</summary><p>Your notes are encrypted in transit and at rest, and they are never used to train AI models or sold to anyone.</p></details>
+      <details><summary>Does Mindly work offline?</summary><p>Yes. Capture and edit offline, and everything syncs as soon as you reconnect.</p></details>
+      <details><summary>Can I import my existing notes?</summary><p>You can import from plain text, Markdown and most popular note apps in a couple of clicks.</p></details>
+      <details><summary>Can I cancel anytime?</summary><p>Of course. Cancel from settings and you keep Pro until the end of your billing period.</p></details>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="section final">
+    <span class="sparkle">✦</span>
+    <h2 class="title">Less chaos.<br><em>More clarity.</em></h2>
+    <a href="#" class="btn btn-dark">Get started free <span>→</span></a>
+  </section>
+  </main>
+
+  <footer class="footer">
+    <span class="logo">Mindly<sup>°</sup></span>
+    <p>© 2026 Mindly. A concept design.</p>
+    <nav><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#">Privacy</a></nav>
+  </footer>
+
+  <button class="to-top" id="to-top" aria-label="Back to top">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
