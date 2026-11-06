@@ -1,3 +1,0 @@
-# Netlify publishes the tideline folder as the website. There is no build step.
-[build]
-  publish = "tideline"
