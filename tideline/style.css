@@ -225,6 +225,9 @@ section.products, section.how, section.dev { padding-top: 120px; }
 .live-feed li:has(a) { grid-template-columns: 1fr auto; }
 .live-feed li a { color: var(--accent); }
 .live-note { margin-top: 10px; font-size: 12px; color: var(--muted); }
+.live-feed .activity-title { margin-top: 18px; }
+#activity li:has(a) { grid-template-columns: 110px 1fr auto; }
+.activity-empty { display: block !important; border-bottom: 0 !important; }
 @keyframes slide-in { from { opacity: 0; transform: translateY(-8px); } }
 
 /* ---------- Product extras ---------- */

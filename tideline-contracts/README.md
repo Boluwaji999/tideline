@@ -218,6 +218,32 @@ address or a contract address.
 
 ---
 
+## Live deployment (Sepolia test network)
+
+| Contract | Address |
+|---|---|
+| MockUSDC | `0x863BE4f5B669735bA8b5663E7e81381C31F324bA` |
+| TideVault | `0x8bf8D1D4e28cb28F73Cd281ECfaD660e2b2281CB` |
+
+The addresses are also in `deployments/sepolia.json`, and the website reads from them
+in `tideline/onchain.js` and `tideline/script.js`.
+
+### Scripts (no MetaMask needed)
+
+Run these from this folder with `& "$env:USERPROFILE\.tideline-venv\Scripts\python.exe"`:
+
+| Script | What it does |
+|---|---|
+| `scripts/deploy_sepolia.py address` | Shows the test wallet and its balance |
+| `scripts/deploy_sepolia.py deploy` | Deploys both contracts (refuses any network but Sepolia) |
+| `scripts/smoke_test_sepolia.py` | Claim, deposit and withdraw with the deploy wallet |
+| `scripts/test_new_wallet.py` | Does the same as a brand-new funded wallet |
+
+They create `sepolia-test-wallet.key` and `sepolia-test-user.key`. Those files hold private
+keys in plain text, are ignored by Git, and must only ever hold test money.
+
+---
+
 ## Known limitations (on purpose, to keep it simple)
 
 - The owner is fixed at deployment. There is no `transferOwnership`.

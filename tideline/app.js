@@ -1,4 +1,4 @@
-// Tideline demo app: play-money margin trading on live prices.
+// Tideline app: simulated margin trading on live prices, plus the real test-network vault.
 
 const MARKETS = [
   { id: "bitcoin", sym: "BTC", name: "Bitcoin" },
@@ -229,8 +229,11 @@ function renderVault() {
   const c = TideChain.state;
   const typed = $("v-amount")?.value ?? "";
   let body;
-  if (!c.hasWallet) {
-    body = `<p class="v-note">No browser wallet is available on this page. To use the vault, install <a href="https://metamask.io" target="_blank" rel="noopener">MetaMask</a> in Chrome and open the app with run-site.cmd from the Tideline folder.</p>`;
+  if (!c.hasWallet && /Android|iPhone|iPad/i.test(navigator.userAgent)) {
+    const here = location.host + location.pathname;
+    body = `<p class="v-note">On a phone, this page has to run inside the MetaMask app. <a href="https://metamask.app.link/dapp/${here}">Open in MetaMask ↗</a></p>`;
+  } else if (!c.hasWallet) {
+    body = `<p class="v-note">No browser wallet is available on this page. To use the vault, open this site in Chrome with <a href="https://metamask.io" target="_blank" rel="noopener">MetaMask</a> installed.</p>`;
   } else if (!c.account) {
     body = `<button class="btn btn-primary btn-sm" data-v="connect">Connect MetaMask</button>`;
   } else if (!c.onSepolia) {

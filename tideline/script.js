@@ -127,22 +127,76 @@ setInterval(() => {
 const VAULT = "0x8bf8D1D4e28cb28F73Cd281ECfaD660e2b2281CB";
 const TOTAL_DEPOSITS = "0x7d882097"; // totalDeposits()
 
+const VAULT_EVENTS = {
+  "0x2da466a7b24304f47e87fa2e1e5a81b9831ce54fec19055ce277ca2f39ba42c4": "Deposited",
+  "0x7084f5476618d8e60b11ef0d7d3f06914655adb8793e28ff7f018d4c76d505d5": "Withdrew",
+};
+const SECONDS_PER_BLOCK = 12;
+const MUSDC = (hex) => (Number(BigInt(hex)) / 1e6).toLocaleString("en-US", { maximumFractionDigits: 2 });
+
+async function sepolia(method, params) {
+  const res = await fetch("https://ethereum-sepolia-rpc.publicnode.com", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ jsonrpc: "2.0", id: 1, method, params }),
+  });
+  const { result, error } = await res.json();
+  if (error) throw new Error(error.message);
+  return result;
+}
+
 async function loadVaultTotal() {
   const el = document.getElementById("vault-total");
   try {
-    const res = await fetch("https://ethereum-sepolia-rpc.publicnode.com", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "eth_call", params: [{ to: VAULT, data: TOTAL_DEPOSITS }, "latest"] }),
-    });
-    const { result } = await res.json();
-    el.textContent = (Number(BigInt(result)) / 1e6).toLocaleString("en-US", { maximumFractionDigits: 2 });
+    el.textContent = MUSDC(await sepolia("eth_call", [{ to: VAULT, data: TOTAL_DEPOSITS }, "latest"]));
   } catch {
     el.textContent = "Unavailable";
   }
 }
+
+function timeAgo(blocks) {
+  const minutes = Math.round((blocks * SECONDS_PER_BLOCK) / 60);
+  if (minutes < 1) return "just now";
+  if (minutes < 60) return `${minutes}m ago`;
+  if (minutes < 1440) return `${Math.round(minutes / 60)}h ago`;
+  return `${Math.round(minutes / 1440)}d ago`;
+}
+
+// Public nodes limit how far back they search, so fall back to shorter ranges
+async function recentVaultLogs(latest) {
+  for (const range of [40000, 8000, 1000]) {
+    try {
+      const fromBlock = "0x" + Math.max(0, latest - range).toString(16);
+      return await sepolia("eth_getLogs", [{ address: VAULT, topics: [Object.keys(VAULT_EVENTS)], fromBlock, toBlock: "latest" }]);
+    } catch { /* try a shorter range */ }
+  }
+  throw new Error("logs unavailable");
+}
+
+async function loadActivity() {
+  const list = document.getElementById("activity");
+  try {
+    const latest = parseInt(await sepolia("eth_blockNumber", []), 16);
+    const logs = await recentVaultLogs(latest);
+    if (!logs.length) {
+      list.innerHTML = `<li class="activity-empty">No deposits or withdrawals recently.</li>`;
+      return;
+    }
+    list.innerHTML = logs.slice(-4).reverse().map((log) => {
+      const who = "0x" + log.topics[1].slice(-40);
+      const ago = timeAgo(latest - parseInt(log.blockNumber, 16));
+      return `<li><span class="addr">${who.slice(0, 6)}…${who.slice(-4)}</span>` +
+        `<span>${VAULT_EVENTS[log.topics[0]]} <b>${MUSDC(log.data)} mUSDC</b></span>` +
+        `<a href="https://sepolia.etherscan.io/tx/${log.transactionHash}" target="_blank" rel="noopener">${ago} ↗</a></li>`;
+    }).join("");
+  } catch {
+    list.innerHTML = `<li class="activity-empty">Activity is unavailable right now.</li>`;
+  }
+}
+
 loadVaultTotal();
-setInterval(loadVaultTotal, 60_000);
+loadActivity();
+setInterval(() => { loadVaultTotal(); loadActivity(); }, 60_000);
 
 // ---------- Back-to-top button: appears once you've scrolled past the hero ----------
 const toTop = document.getElementById("to-top");
